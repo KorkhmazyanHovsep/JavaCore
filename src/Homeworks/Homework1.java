@@ -32,7 +32,7 @@ public class Homework1 {
         // Printing the multiplication table of the given number.
         int n = 3;
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 10; i++) {
             System.out.println(n + " * " + i + " = " + (n * i));
 
         }
