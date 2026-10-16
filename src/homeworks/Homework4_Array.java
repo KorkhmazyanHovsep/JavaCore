@@ -7,7 +7,7 @@ public class Homework4_Array {
         int[] numbers = {6, 3, 8, 6, 1, 9, 6, 4, 2, 6};
 
 
-        //#1 Counting the occurrence of the given number.
+        //#1 Counting the occurrences of the given number.
         System.out.println("Enter a number.");
         int n = (int) System.in.read() - '0';
         int count = 0;
@@ -88,7 +88,7 @@ public class Homework4_Array {
         System.out.println("Second Maximum: " + secondMax);
         System.out.println();
 
-        //#2 Removing duplicates for the array.
+        //#2 Removing duplicates from the array.
         for (int i = 0; i < numbers.length; i++) {
             boolean isFirst = true;
             for (int j = 0; j < i; j++) {
