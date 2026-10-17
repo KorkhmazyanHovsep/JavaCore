@@ -2,7 +2,7 @@ package homeworks;
 
 import java.io.IOException;
 
-public class Homework4_Array {
+public class ArrayHomework {
     public static void main(String[] args) throws IOException {
         int[] numbers = {6, 3, 8, 6, 1, 9, 6, 4, 2, 6};
 
@@ -75,7 +75,7 @@ public class Homework4_Array {
         //# Bonus Tasks
         //#1 Finding the second-largest number.
         int max = numbers[0];
-        int secondMax = -2147483648;
+        int secondMax = Integer.MIN_VALUE;
 
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] > max) {
