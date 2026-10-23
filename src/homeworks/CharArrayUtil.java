@@ -167,7 +167,7 @@ public class CharArrayUtil {
         for (int i = 0; i < bonus1Chars.length; i++) {
             if (bonus1Chars[i] == target) {
                 firstIndex = i;
-                break; // Required to stop at the *first* occurrence
+                break;
             }
         }
         System.out.println("First index: " + firstIndex);
