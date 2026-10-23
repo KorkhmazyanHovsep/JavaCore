@@ -3,7 +3,7 @@ package homeworks;
 import java.io.IOException;
 
 public class CharArrayUtil {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         char[] chars = {
                 'J', 'a', 'v', 'a', ' ',
                 'i', 's', ' ', 'f', 'u', 'n', '!'
@@ -16,13 +16,10 @@ public class CharArrayUtil {
         System.out.println();
 
         // #2 Counting the number of characters.
-        int count = 0;
+        int count = chars.length;
         char first = chars[0];
         char last = chars[chars.length - 1];
 
-        for (int i = 0; i < chars.length; i++) {
-            count++;
-        }
         System.out.println("Characters count: " + count);
         System.out.println("First character: " + first);
         System.out.println("Last character: " + last);
