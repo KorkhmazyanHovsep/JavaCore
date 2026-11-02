@@ -14,7 +14,7 @@ public class OverloadDemo {
     }
 
     double test(double a) {
-        System.out.println("double a: " + a);
+        System.out.println("Inside test (double) a: " + a);
         return a * a;
     }
 }
