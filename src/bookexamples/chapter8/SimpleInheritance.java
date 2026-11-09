@@ -2,13 +2,13 @@ package bookexamples.chapter8;
 
 public class SimpleInheritance {
     public static void main(String[] args) {
-        A superOb = new A();
+        //A superOb = new A();
         B subOb = new B();
 
-        superOb.i = 10;
-        superOb.j = 20;
+        //superOb.i = 10;
+        //superOb.j = 20;
         System.out.println("Contents of suberOb: ");
-        superOb.show();
+        //superOb.show();
         System.out.println();
 
 
