@@ -1,7 +1,5 @@
 package homeworks.bracechecker;
 
-import javax.swing.*;
-
 public class BraceCheckerTest {
     public static void main(String[] args) {
         String[] testCases = {

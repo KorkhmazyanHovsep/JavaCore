@@ -22,20 +22,20 @@ public class BraceChecker {
                 stack.push(ch);
             } else if (ch == '}' || ch == ']' || ch == ')') {
                 if (stack.isEmpty()) {
-                    System.out.println("Error: closed " + ch + "at index " + i + "but stack is empty.");
+                    System.out.println("Error: closed " + ch + " at index " + i + " but stack is empty.");
                     return;
                 }
 
                 char lastOpen = stack.pop();
 
                 if (ch == '}' && lastOpen != '{') {
-                    System.out.println("Error: opened " + lastOpen + "but closed " + ch + "at" + i);
+                    System.out.println("Error: opened " + lastOpen + " but closed " + ch + " at " + i);
                     return;
                 } else if (ch == ']' && lastOpen != '[') {
-                    System.out.println("Error: opened " + lastOpen + "but closed " + ch + "at" + i);
+                    System.out.println("Error: opened " + lastOpen + "but closed " + ch + " at " + i);
                     return;
                 } else if (ch == ')' && lastOpen != '(') {
-                    System.out.println("Error: opened " + lastOpen + "but closed " + ch + "at" + i);
+                    System.out.println("Error: opened " + lastOpen + " but closed " + ch + " at " + i);
                     return;
                 }
 
