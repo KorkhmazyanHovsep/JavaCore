@@ -8,8 +8,8 @@ public class BraceChecker {
     }
 
     public void check() {
-        if (text == null) {
-            System.out.println("Text is missing");
+        if (text == null || text.isEmpty()) {
+            System.out.println("No Errors.");
             return;
         }
 
