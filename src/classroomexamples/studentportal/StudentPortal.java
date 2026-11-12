@@ -6,6 +6,12 @@ public class StudentPortal {
     private static Scanner scanner = new Scanner(System.in);
     private static StudentStorage studentStorage = new StudentStorage();
 
+    private static final String EXIT = "0";
+    private static final String ADD_STUDENT = "1";
+    private static final String PRINT_ALL_STUDENTS = "2";
+    private static final String SEARCH_STUDENT = "3";
+    private static final String SEARCH_STUDENT_BY_COURSE = "4";
+
     public static void main(String[] args) {
         boolean isRunning = true;
 
@@ -14,19 +20,19 @@ public class StudentPortal {
 
             String command = scanner.nextLine();
             switch (command) {
-                case "0":
+                case EXIT:
                     isRunning = false;
                     break;
-                case "1":
+                case ADD_STUDENT:
                     addStudent();
                     break;
-                case "2":
+                case PRINT_ALL_STUDENTS:
                     studentStorage.print();
                     break;
-                case "3":
+                case SEARCH_STUDENT:
                     searchStudent();
                     break;
-                case "4":
+                case SEARCH_STUDENT_BY_COURSE:
                     searchStudentByCourse();
                     break;
                 default:
@@ -36,11 +42,11 @@ public class StudentPortal {
     }
 
     private static void printCommands() {
-        System.out.println("Enter 0 to EXIT");
-        System.out.println("Enter 1 to ADD a Student");
-        System.out.println("Enter 2 to PRINT all Students");
-        System.out.println("Enter 3 to SEARCH a Student");
-        System.out.println("Enter 4 to SEARCH by Course");
+        System.out.println("Enter" + EXIT + "to EXIT");
+        System.out.println("Enter" + ADD_STUDENT + "to ADD a Student");
+        System.out.println("Enter" + PRINT_ALL_STUDENTS + "to PRINT all Students");
+        System.out.println("Enter" + SEARCH_STUDENT + "to SEARCH a Student");
+        System.out.println("Enter" + SEARCH_STUDENT_BY_COURSE + "to SEARCH BY Course");
     }
 
     public static void searchStudentByCourse() {
