@@ -32,7 +32,7 @@ public class BraceChecker {
                     System.out.println("Error: opened " + lastOpen + " but closed " + ch + " at " + i);
                     return;
                 } else if (ch == ']' && lastOpen != '[') {
-                    System.out.println("Error: opened " + lastOpen + "but closed " + ch + " at " + i);
+                    System.out.println("Error: opened " + lastOpen + " but closed " + ch + " at " + i);
                     return;
                 } else if (ch == ')' && lastOpen != '(') {
                     System.out.println("Error: opened " + lastOpen + " but closed " + ch + " at " + i);
