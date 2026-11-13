@@ -3,6 +3,12 @@ package homeworks.employee;
 import java.util.Scanner;
 
 public class EmployeeDemo {
+    private static final String EXIT = "0";
+    private static final String ADD_EMPLOYEE = "1";
+    private static final String PRINT_EMPLOYEES = "2";
+    private static final String SEARCH_BY_ID = "3";
+    private static final String SEARCH_BY_COMPANY = "4";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EmployeeStorage storage = new EmployeeStorage();
@@ -41,11 +47,11 @@ public class EmployeeDemo {
     }
 
     public static void printMenu() {
-        System.out.println("Input 0 for EXIT");
-        System.out.println("Input 1 for ADD EMPLOYEE");
-        System.out.println("Input 2 for PRINT ALL EMPLOYEE");
-        System.out.println("Input 3 for SEARCH EMPLOYEE BY ID");
-        System.out.println("Input 4 for SEARCH EMPLOYEE BY COMPANY NAME");
+        System.out.println("Input " + EXIT + " for EXIT");
+        System.out.println("Input " + ADD_EMPLOYEE + " for ADD EMPLOYEE");
+        System.out.println("Input " + PRINT_EMPLOYEES + " for PRINT ALL EMPLOYEE");
+        System.out.println("Input " + SEARCH_BY_ID + " for SEARCH EMPLOYEE BY ID");
+        System.out.println("Input " + SEARCH_BY_COMPANY + " for SEARCH EMPLOYEE BY COMPANY NAME");
         System.out.println("Input: ");
     }
 
