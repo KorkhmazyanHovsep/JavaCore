@@ -40,14 +40,14 @@ public class EmployeeStorage {
         boolean found = false;
         System.out.println("Employees:");
         for (int i = 0; i < size; i++) {
-            if (employees[i].getCompany().equalsIgnoreCase(companyName)) ;
+            if (employees[i].getCompany().equalsIgnoreCase(companyName))
             {
                 System.out.println(employees[i].getName() + " " + employees[i]);
                 found = true;
             }
         }
         if (!found) {
-            System.out.println("Ne employees found for company " + companyName);
+            System.out.println("No employees found for company " + companyName);
         }
     }
 }
