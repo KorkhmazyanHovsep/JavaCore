@@ -1,6 +1,6 @@
 package homeworks;
 
-public class ArraySortingHomework {
+public class ArraySorting {
     public static void main(String[] args) {
         int[] numbers = {12, 5, 8, -3, 21, 7, 0, 15, 2, 9};
 

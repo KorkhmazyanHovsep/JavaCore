@@ -1,6 +1,6 @@
 package homeworks;
 
-public class Homework1 {
+public class Homework {
     public static void main(String[] args) {
         // Checking which of the two integers is greater.
         int x = 10;

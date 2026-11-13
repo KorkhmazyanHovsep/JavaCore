@@ -1,6 +1,6 @@
 package homeworks;
 
-public class Homework2_StarPatterns {
+public class StarPatterns {
     public static void main(String[] args) {
         int rows = 5;
 

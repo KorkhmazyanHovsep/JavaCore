@@ -2,7 +2,7 @@ package homeworks;
 
 import java.io.IOException;
 
-public class ArrayHomework {
+public class Array {
     public static void main(String[] args) throws IOException {
         int[] numbers = {6, 3, 8, 6, 1, 9, 6, 4, 2, 6};
 
