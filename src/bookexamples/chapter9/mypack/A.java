@@ -4,6 +4,7 @@ public class A {
     public interface NestedIf {
         boolean isNotNegative(int x);
     }
+
 }
 
 class B implements A.NestedIf {

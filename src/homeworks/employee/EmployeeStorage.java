@@ -40,8 +40,7 @@ public class EmployeeStorage {
         boolean found = false;
         System.out.println("Employees:");
         for (int i = 0; i < size; i++) {
-            if (employees[i].getCompany().equalsIgnoreCase(companyName))
-            {
+            if (employees[i].getCompany().equalsIgnoreCase(companyName)) {
                 System.out.println(employees[i].getName() + " " + employees[i]);
                 found = true;
             }
@@ -49,5 +48,47 @@ public class EmployeeStorage {
         if (!found) {
             System.out.println("No employees found for company " + companyName);
         }
+    }
+
+    public boolean isEmployeeExists(String employeeID) {
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getEmployeeID().equals(employeeID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void searchByMinSalary(double minSalary) {
+        boolean found = false;
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getSalary() >= minSalary) {
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No employees found with salary >= 0 " + minSalary);
+        }
+    }
+
+    public void deleteByID(String employeeID) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getEmployeeID().equals(employeeID)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            System.out.println("Employee with ID 0 + " + employeeID + " no found.");
+            return;
+        }
+
+        for (int i = index; i < size - 1; i++) {
+            employees[i] = employees[i + 1];
+        }
+        employees[size - 1] = null;
+        size--;
+        System.out.println("Employee with ID " + employeeID + " successfully deleted.");
     }
 }

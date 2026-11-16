@@ -8,6 +8,8 @@ public class EmployeeDemo {
     private static final String PRINT_EMPLOYEES = "2";
     private static final String SEARCH_BY_ID = "3";
     private static final String SEARCH_BY_COMPANY = "4";
+    private static final String SEARCH_BY_MIN_SALARY = "5";
+    private static final String DELETE_BY_ID = "6";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -18,26 +20,32 @@ public class EmployeeDemo {
             printMenu();
             String command = scanner.nextLine();
             switch (command) {
-                case "0":
+                case EXIT:
                     isRun = false;
                     System.out.println("Program Finished");
                     break;
-                case "1":
+
+                case ADD_EMPLOYEE:
                     addEmployee(scanner, storage);
                     break;
 
-                case "2":
+                case PRINT_EMPLOYEES:
                     printEmployees(storage);
                     break;
 
-                case "3":
+                case SEARCH_BY_ID:
                     searchByID(scanner, storage);
                     break;
 
-                case "4":
+                case SEARCH_BY_COMPANY:
                     searchByCompany(scanner, storage);
                     break;
-
+                case SEARCH_BY_MIN_SALARY:
+                    searchByMinSalary(scanner, storage);
+                    break;
+                case DELETE_BY_ID:
+                    deleteByID(scanner, storage);
+                    break;
                 default:
                     System.out.println("Invalid Command");
 
@@ -52,6 +60,8 @@ public class EmployeeDemo {
         System.out.println("Input " + PRINT_EMPLOYEES + " for PRINT ALL EMPLOYEE");
         System.out.println("Input " + SEARCH_BY_ID + " for SEARCH EMPLOYEE BY ID");
         System.out.println("Input " + SEARCH_BY_COMPANY + " for SEARCH EMPLOYEE BY COMPANY NAME");
+        System.out.println("Input " + SEARCH_BY_MIN_SALARY + " for SEARCH EMPLOYEES BY MINIMUM SALARY");
+        System.out.println("Input " + DELETE_BY_ID + " for DELETE EMPLOYEE BY ID");
         System.out.println("Input: ");
     }
 
@@ -64,6 +74,10 @@ public class EmployeeDemo {
 
         System.out.println("Input employee ID: ");
         String employeeID = scanner.nextLine();
+        if (storage.searchID(employeeID) != null) {
+            System.out.println("Employee with ID " + employeeID + " already exists.");
+            return;
+        }
 
         System.out.println("Input employee salary: ");
         double salary = Double.parseDouble(scanner.nextLine());
@@ -101,5 +115,17 @@ public class EmployeeDemo {
         String searchCompany = scanner.nextLine();
         storage.searchByCompany(searchCompany);
 
+    }
+
+    public static void deleteByID(Scanner scanner, EmployeeStorage storage) {
+        System.out.println("Input employee ID to delete.");
+        String deleteID = scanner.nextLine();
+        storage.deleteByID(deleteID);
+    }
+
+    public static void searchByMinSalary(Scanner scanner, EmployeeStorage storage) {
+        System.out.println("Input minimum salary. ");
+        double minSalary = Double.parseDouble(scanner.nextLine());
+        storage.searchByMinSalary(minSalary);
     }
 }

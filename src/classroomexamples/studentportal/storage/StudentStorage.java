@@ -1,4 +1,7 @@
-package classroomexamples.studentportal;
+package classroomexamples.studentportal.storage;
+
+import classroomexamples.studentportal.model.Course;
+import classroomexamples.studentportal.model.Student;
 
 public class StudentStorage {
     private Student[] array = new Student[10];
@@ -42,9 +45,9 @@ public class StudentStorage {
         }
     }
 
-    public void searchByCourse(String course) {
+    public void searchByCourse(Course course) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getCourse().equalsIgnoreCase(course)) {
+            if (array[i].getCourse().equals(course)) {
                 System.out.println(array[i] + " ");
             }
         }
