@@ -8,6 +8,7 @@ public class EmployeeDemo implements Commands {
         Scanner scanner = new Scanner(System.in);
         EmployeeStorage employeeStorage = new EmployeeStorage();
         CompanyStorage companyStorage = new CompanyStorage();
+        init(employeeStorage, companyStorage);
         boolean isRun = true;
 
         while (isRun) {
@@ -104,10 +105,30 @@ public class EmployeeDemo implements Commands {
         System.out.println("Input " + PRINT_EMPLOYEES_BY_COMPANY_ID + " for PRINT EMPLOYEES BY COMPANY ID");
         System.out.println("Input " + CHANGE_EMPLOYEE_COMPANY + " for CHANGE EMPLOYEE COMPANY");
         System.out.println("Input " + PRINT_EMPLOYEE_COMPANY + " for PRINT EMPLOYEE COMPANY");
-        System.out.println("Input " + COUNT_EMPLOYEES_BY_COMPANY + " for COUNT EMPLOYEES BY COMPANY (Bonus 1)");
-        System.out.println("Input " + TOTAL_SALARY_BY_COMPANY + " for CALCULATE TOTAL SALARY BY COMPANY (Bonus 2)");
-        System.out.println("Input " + HIGHEST_PAID_EMPLOYEE + " for FIND HIGHEST PAID EMPLOYEE (Bonus 3)");
-        System.out.println("Input " + DELETE_COMPANY + " for DELETE COMPANY (Bonus 5)");
+        System.out.println("Input " + COUNT_EMPLOYEES_BY_COMPANY + " for COUNT EMPLOYEES BY COMPANY");
+        System.out.println("Input " + TOTAL_SALARY_BY_COMPANY + " for CALCULATE TOTAL SALARY BY COMPANY");
+        System.out.println("Input " + HIGHEST_PAID_EMPLOYEE + " for FIND HIGHEST PAID EMPLOYEE");
+        System.out.println("Input " + DELETE_COMPANY + " for DELETE COMPANY");
+    }
+
+    private static void init(EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        Company c1 = new Company("C001", "TechCorp", "Software", "USA");
+        Company c2 = new Company("C002", "DataSystems", "Analytics", "Germany");
+        Company c3 = new Company("C003", "InnoWorks", "Hardware", "Japan");
+
+        companyStorage.add(c1);
+        companyStorage.add(c2);
+        companyStorage.add(c3);
+
+        Employee e1 = new Employee("Alice", "Smith", "E001", 75000.0, c1, "Developer");
+        Employee e2 = new Employee("Bob", "Johnson", "E002", 92000.0, c1, "Team Lead");
+        Employee e3 = new Employee("Charlie", "Brown", "E003", 64000.0, c2, "Analyst");
+        Employee e4 = new Employee("Diana", "Prince", "E004", 110000.0, c3, "Engineer");
+
+        employeeStorage.add(e1);
+        employeeStorage.add(e2);
+        employeeStorage.add(e3);
+        employeeStorage.add(e4);
     }
 
     public static void addEmployee(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
