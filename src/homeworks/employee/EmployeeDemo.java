@@ -2,18 +2,12 @@ package homeworks.employee;
 
 import java.util.Scanner;
 
-public class EmployeeDemo {
-    private static final String EXIT = "0";
-    private static final String ADD_EMPLOYEE = "1";
-    private static final String PRINT_EMPLOYEES = "2";
-    private static final String SEARCH_BY_ID = "3";
-    private static final String SEARCH_BY_COMPANY = "4";
-    private static final String SEARCH_BY_MIN_SALARY = "5";
-    private static final String DELETE_BY_ID = "6";
+public class EmployeeDemo implements Commands {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        EmployeeStorage storage = new EmployeeStorage();
+        EmployeeStorage employeeStorage = new EmployeeStorage();
+        CompanyStorage companyStorage = new CompanyStorage();
         boolean isRun = true;
 
         while (isRun) {
@@ -26,32 +20,74 @@ public class EmployeeDemo {
                     break;
 
                 case ADD_EMPLOYEE:
-                    addEmployee(scanner, storage);
+                    addEmployee(scanner, employeeStorage, companyStorage);
                     break;
 
                 case PRINT_EMPLOYEES:
-                    printEmployees(storage);
+                    printEmployees(employeeStorage);
                     break;
 
                 case SEARCH_BY_ID:
-                    searchByID(scanner, storage);
+                    searchByID(scanner, employeeStorage);
                     break;
 
                 case SEARCH_BY_COMPANY:
-                    searchByCompany(scanner, storage);
+                    searchByCompany(scanner, employeeStorage);
                     break;
+
                 case SEARCH_BY_MIN_SALARY:
-                    searchByMinSalary(scanner, storage);
+                    searchByMinSalary(scanner, employeeStorage);
                     break;
+
                 case DELETE_BY_ID:
-                    deleteByID(scanner, storage);
+                    deleteByID(scanner, employeeStorage);
                     break;
+
+                case ADD_COMPANY:
+                    addCompany(scanner, companyStorage);
+                    break;
+
+                case PRINT_COMPANIES:
+                    printCompanies(companyStorage);
+                    break;
+
+                case SEARCH_COMPANY_BY_ID:
+                    searchCompanyByID(scanner, companyStorage);
+                    break;
+
+                case PRINT_EMPLOYEES_BY_COMPANY_ID:
+                    printEmployeesByCompanyID(scanner, employeeStorage, companyStorage);
+                    break;
+
+                case CHANGE_EMPLOYEE_COMPANY:
+                    changeEmployeeCompany(scanner, employeeStorage, companyStorage);
+                    break;
+
+                case PRINT_EMPLOYEE_COMPANY:
+                    printEmployeeCompany(scanner, employeeStorage);
+                    break;
+
+                case COUNT_EMPLOYEES_BY_COMPANY:
+                    countEmployeesByCompany(scanner, employeeStorage, companyStorage);
+                    break;
+
+                case TOTAL_SALARY_BY_COMPANY:
+                    totalSalaryByCompany(scanner, employeeStorage, companyStorage);
+                    break;
+
+                case HIGHEST_PAID_EMPLOYEE:
+                    highestPaidEmployee(employeeStorage);
+                    break;
+
+                case DELETE_COMPANY:
+                    deleteCompany(scanner, companyStorage, employeeStorage);
+                    break;
+
                 default:
                     System.out.println("Invalid Command");
-
             }
         }
-
+        scanner.close();
     }
 
     public static void printMenu() {
@@ -62,70 +98,222 @@ public class EmployeeDemo {
         System.out.println("Input " + SEARCH_BY_COMPANY + " for SEARCH EMPLOYEE BY COMPANY NAME");
         System.out.println("Input " + SEARCH_BY_MIN_SALARY + " for SEARCH EMPLOYEES BY MINIMUM SALARY");
         System.out.println("Input " + DELETE_BY_ID + " for DELETE EMPLOYEE BY ID");
-        System.out.println("Input: ");
+        System.out.println("Input " + ADD_COMPANY + " for ADD COMPANY");
+        System.out.println("Input " + PRINT_COMPANIES + " for PRINT ALL COMPANIES");
+        System.out.println("Input " + SEARCH_COMPANY_BY_ID + " for SEARCH COMPANY BY ID");
+        System.out.println("Input " + PRINT_EMPLOYEES_BY_COMPANY_ID + " for PRINT EMPLOYEES BY COMPANY ID");
+        System.out.println("Input " + CHANGE_EMPLOYEE_COMPANY + " for CHANGE EMPLOYEE COMPANY");
+        System.out.println("Input " + PRINT_EMPLOYEE_COMPANY + " for PRINT EMPLOYEE COMPANY");
+        System.out.println("Input " + COUNT_EMPLOYEES_BY_COMPANY + " for COUNT EMPLOYEES BY COMPANY (Bonus 1)");
+        System.out.println("Input " + TOTAL_SALARY_BY_COMPANY + " for CALCULATE TOTAL SALARY BY COMPANY (Bonus 2)");
+        System.out.println("Input " + HIGHEST_PAID_EMPLOYEE + " for FIND HIGHEST PAID EMPLOYEE (Bonus 3)");
+        System.out.println("Input " + DELETE_COMPANY + " for DELETE COMPANY (Bonus 5)");
     }
 
-    public static void addEmployee(Scanner scanner, EmployeeStorage storage) {
+    public static void addEmployee(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        System.out.println("Input employee ID: ");
+        String employeeID = scanner.nextLine();
+        if (employeeStorage.getById(employeeID) != null) {
+            System.out.println("Employee with ID " + employeeID + " already exists.");
+            return;
+        }
+
         System.out.println("Input employee name: ");
         String name = scanner.nextLine();
 
         System.out.println("Input employee surname: ");
         String surname = scanner.nextLine();
 
-        System.out.println("Input employee ID: ");
-        String employeeID = scanner.nextLine();
-        if (storage.searchID(employeeID) != null) {
-            System.out.println("Employee with ID " + employeeID + " already exists.");
-            return;
-        }
-
         System.out.println("Input employee salary: ");
         double salary = Double.parseDouble(scanner.nextLine());
-
-        System.out.println("Input employee company: ");
-        String company = scanner.nextLine();
 
         System.out.println("Input employee position: ");
         String position = scanner.nextLine();
 
-        Employee employee = new Employee(name, surname, employeeID, salary, company, position);
-        storage.add(employee);
-        System.out.println("Employee successfully added.");
+        System.out.println("Input company ID: ");
+        String companyId = scanner.nextLine();
 
+        Company company = companyStorage.getById(companyId);
+        if (company != null) {
+            Employee employee = new Employee(name, surname, employeeID, salary, company, position);
+            employeeStorage.add(employee);
+            System.out.println("Employee successfully added!");
+        } else {
+            System.out.println("Company with ID " + companyId + " not found. Please add the company first.");
+        }
     }
 
     public static void printEmployees(EmployeeStorage storage) {
-        storage.print();
+        storage.printAll();
     }
 
     public static void searchByID(Scanner scanner, EmployeeStorage storage) {
-        System.out.println("Input employee ID");
+        System.out.println("Input employee ID:");
         String searchID = scanner.nextLine();
 
-        Employee foundEmployee = storage.searchID(searchID);
+        Employee foundEmployee = storage.getById(searchID);
         if (foundEmployee != null) {
-            System.out.println("Employee found: " + foundEmployee);
+            System.out.println("Employee found:\n" + foundEmployee);
         } else {
             System.out.println("Employee with ID: " + searchID + " not found.");
         }
     }
 
     public static void searchByCompany(Scanner scanner, EmployeeStorage storage) {
-        System.out.println("Input company name: ");
+        System.out.println("Input company name:");
         String searchCompany = scanner.nextLine();
-        storage.searchByCompany(searchCompany);
+        storage.printByCompanyName(searchCompany);
+    }
 
+    public static void searchByMinSalary(Scanner scanner, EmployeeStorage storage) {
+        System.out.println("Input minimum salary:");
+        double minSalary = Double.parseDouble(scanner.nextLine());
+        storage.searchByMinSalary(minSalary);
     }
 
     public static void deleteByID(Scanner scanner, EmployeeStorage storage) {
-        System.out.println("Input employee ID to delete.");
+        System.out.println("Input employee ID to delete:");
         String deleteID = scanner.nextLine();
         storage.deleteByID(deleteID);
     }
 
-    public static void searchByMinSalary(Scanner scanner, EmployeeStorage storage) {
-        System.out.println("Input minimum salary. ");
-        double minSalary = Double.parseDouble(scanner.nextLine());
-        storage.searchByMinSalary(minSalary);
+    public static void addCompany(Scanner scanner, CompanyStorage storage) {
+        System.out.println("Enter company ID:");
+        String companyId = scanner.nextLine();
+        if (storage.getById(companyId) != null) {
+            System.out.println("Company with ID " + companyId + " already exists.");
+            return;
+        }
+
+        System.out.println("Enter company name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter industry:");
+        String industry = scanner.nextLine();
+        System.out.println("Enter country:");
+        String country = scanner.nextLine();
+
+        Company company = new Company(companyId, name, industry, country);
+        storage.add(company);
+        System.out.println("Company successfully added!");
+    }
+
+    public static void printCompanies(CompanyStorage storage) {
+        storage.printAll();
+    }
+
+    public static void searchCompanyByID(Scanner scanner, CompanyStorage storage) {
+        System.out.println("Enter company ID:");
+        String companyId = scanner.nextLine();
+        Company company = storage.getById(companyId);
+        if (company != null) {
+            System.out.println("Company found:\n" + company);
+        } else {
+            System.out.println("Company not found.");
+        }
+    }
+
+    public static void printEmployeesByCompanyID(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        System.out.println("Enter company ID:");
+        String companyId = scanner.nextLine();
+        Company company = companyStorage.getById(companyId);
+        if (company != null) {
+            System.out.println("Company: " + company.getName());
+            System.out.println("Employees:");
+            employeeStorage.printByCompanyId(companyId);
+        } else {
+            System.out.println("Company not found.");
+        }
+    }
+
+    public static void changeEmployeeCompany(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        System.out.println("Enter employee ID:");
+        String employeeId = scanner.nextLine();
+        Employee employee = employeeStorage.getById(employeeId);
+        if (employee != null) {
+            String currentCompName = (employee.getCompany() != null) ? employee.getCompany().getName() : "None";
+            System.out.println("Current company: " + currentCompName);
+
+            System.out.println("Enter new company ID:");
+            String newCompanyId = scanner.nextLine();
+            Company newCompany = companyStorage.getById(newCompanyId);
+
+            if (newCompany != null) {
+                employee.setCompany(newCompany);
+                System.out.println("Employee company successfully changed! New company: " + newCompany.getName());
+            } else {
+                System.out.println("Company not found. Employee's company remains unchanged.");
+            }
+        } else {
+            System.out.println("Employee not found.");
+        }
+    }
+
+    public static void printEmployeeCompany(Scanner scanner, EmployeeStorage employeeStorage) {
+        System.out.println("Enter employee ID:");
+        String employeeId = scanner.nextLine();
+        Employee employee = employeeStorage.getById(employeeId);
+        if (employee != null) {
+            System.out.println("Employee: " + employee.getName() + " " + employee.getSurname());
+            if (employee.getCompany() != null) {
+                System.out.println("Company information:\n" + employee.getCompany());
+            } else {
+                System.out.println("Company information: None");
+            }
+        } else {
+            System.out.println("Employee not found.");
+        }
+    }
+
+    public static void countEmployeesByCompany(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        System.out.println("Enter company ID:");
+        String companyId = scanner.nextLine();
+        Company company = companyStorage.getById(companyId);
+        if (company != null) {
+            int count = employeeStorage.countEmployeesByCompanyId(companyId);
+            System.out.println("Company: " + company.getName());
+            System.out.println("Employees count: " + count);
+        } else {
+            System.out.println("Company not found.");
+        }
+    }
+
+    public static void totalSalaryByCompany(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        System.out.println("Enter company ID:");
+        String companyId = scanner.nextLine();
+        Company company = companyStorage.getById(companyId);
+        if (company != null) {
+            double total = employeeStorage.calculateTotalSalaryByCompanyId(companyId);
+            System.out.println("Company: " + company.getName());
+            System.out.println("Total salary: " + total);
+        } else {
+            System.out.println("Company not found.");
+        }
+    }
+
+    public static void highestPaidEmployee(EmployeeStorage employeeStorage) {
+        Employee highest = employeeStorage.findHighestPaidEmployee();
+        if (highest != null) {
+            System.out.println("Highest paid employee:\n" + highest);
+        } else {
+            System.out.println("No employees found in the system.");
+        }
+    }
+
+    public static void deleteCompany(Scanner scanner, CompanyStorage companyStorage, EmployeeStorage employeeStorage) {
+        System.out.println("Enter company ID to delete:");
+        String companyId = scanner.nextLine();
+        Company company = companyStorage.getById(companyId);
+
+        if (company == null) {
+            System.out.println("Company not found.");
+            return;
+        }
+
+        int empCount = employeeStorage.countEmployeesByCompanyId(companyId);
+        if (empCount > 0) {
+            System.out.println("Cannot delete company. Company has " + empCount + " employees.");
+        } else {
+            companyStorage.deleteByID(companyId);
+        }
     }
 }

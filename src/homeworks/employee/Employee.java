@@ -7,13 +7,13 @@ public class Employee {
     private String surname;
     private String employeeID;
     private double salary;
-    private String company;
+    private Company company;
     private String position;
 
     public Employee() {
     }
 
-    public Employee(String name, String surname, String employeeID, double salary, String company, String position) {
+    public Employee(String name, String surname, String employeeID, double salary, Company company, String position) {
         this.name = name;
         this.surname = surname;
         this.employeeID = employeeID;
@@ -54,11 +54,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getCompany() {
+    public Company getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 
@@ -77,7 +77,7 @@ public class Employee {
                 ", surname='" + surname + '\'' +
                 ", employeeID='" + employeeID + '\'' +
                 ", salary=" + salary +
-                ", company='" + company + '\'' +
+                ", company=" + (company != null ? company.getName() : "None") +
                 ", position='" + position + '\'' +
                 '}';
     }
@@ -88,15 +88,10 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return Objects.equals(employeeID, employee.employeeID);
-
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(employeeID);
     }
-
-
 }
-
-
